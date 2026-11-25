@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>3D Printing Service — Nationwide India Delivery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #002045;
+    --navy-mid: #1a365d;
+    --orange: #fe6a34;
+    --blue-pale: #eff4ff;
+    --blue-light: #dce9ff;
+    --blue-bg: #f8f9ff;
+    --text-body: #43474e;
+    --text-muted: #74777f;
+    --teal: #89f5e7;
+    --red-dark: #ab3500;
+    --white: #fff;
+    --card-radius: 16px;
+    --pill-radius: 9999px;
+    --shadow-sm: 0 1px 1px rgba(0,0,0,.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--navy);
+    background: var(--white);
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .label-font { font-family: 'Space Grotesk', sans-serif; }
+
+  /* ── NAV (Figma exact) ── */
+  .nav-wrapper {
+    background: #fff;
+    border-bottom: 1px solid #e5eeff;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1440px; margin: 0 auto;
+    padding: 0 32px; height: 80px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  /* Logo block */
+  .nav-logo { display: flex; align-items: center; gap: 16px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .nav-logo-icon svg { width: 18px; height: 18px; }
+  .nav-logo-text { display: flex; flex-direction: column; }
+  .nav-logo-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600;
+    color: var(--navy); letter-spacing: -.45px; line-height: 1.33;
+  }
+  .nav-logo-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 700;
+    color: var(--text-body); letter-spacing: .5px;
+    text-transform: uppercase; line-height: 1.4;
+  }
+  /* Nav links */
+  .nav-links { display: flex; align-items: center; gap: 24px; height: 80px; }
+  .nav-link {
+    display: flex; align-items: center; height: 100%;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600;
+    color: var(--text-body); text-decoration: none;
+    letter-spacing: .28px; white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: color .15s, border-color .15s;
+  }
+  .nav-link:hover { color: var(--navy); }
+  .nav-link.active {
+    color: var(--red-dark);
+    border-bottom-color: var(--red-dark);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+  }
+  /* Nav right */
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-cta {
+    background: var(--orange);
+    color: #fff; border: none;
+    border-radius: 8px; padding: 10px 20px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600;
+    letter-spacing: .28px; cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    white-space: nowrap; transition: background .15s;
+    text-decoration: none; display: inline-flex; align-items: center;
+  }
+  .nav-cta:hover { background: #e55a26; }
+  .nav-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .nav-avatar svg { width: 14px; height: 14px; color: #fff; }
+  /* Mobile hamburger */
+  .nav-hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: all .2s; }
+  .nav-mobile-menu {
+    display: none; position: fixed; inset: 80px 0 0;
+    background: #fff; z-index: 99;
+    flex-direction: column; padding: 24px 32px; gap: 4px;
+    border-top: 1px solid var(--blue-light);
+    box-shadow: 0 8px 32px rgba(0,0,0,.08);
+  }
+  .nav-mobile-menu.open { display: flex; }
+  .nav-mobile-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600; color: var(--navy);
+    text-decoration: none; padding: 12px 0;
+    border-bottom: 1px solid var(--blue-light);
+  }
+  .nav-mobile-link.active { color: var(--red-dark); }
+  .nav-mobile-cta {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--orange); color: #fff;
+    border-radius: 8px; padding: 14px; margin-top: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+  }
+  @media (max-width: 1024px) {
+    .nav-links { display: none; }
+    .nav-avatar { display: none; }
+    .nav-hamburger { display: flex; }
+  }
+
+  /* ── SECTION CONTAINERS ── */
+  .section-wrap { width: 100%; position: relative; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+  /* ── HERO SECTION ── */
+  .hero {
+    background: linear-gradient(90deg, #fff 0%, #fff 100%);
+    position: relative; overflow: hidden;
+    padding: 96px 32px;
+    text-align: center;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    width: 720px; height: 360px;
+    border-radius: 9999px;
+    background: rgba(254,106,52,.05);
+    filter: blur(64px);
+    top: -96px; left: 50%; transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    width: 288px; height: 288px;
+    border-radius: 9999px;
+    background: rgba(0,32,69,.05);
+    filter: blur(40px);
+    top: 33%; right: 48px;
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 0; position: relative; }
+  .badge-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #e5eeff;
+    border: 1px solid var(--blue-light);
+    border-radius: var(--pill-radius);
+    padding: 7px 15px;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 24px;
+  }
+  .badge-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); flex-shrink: 0; }
+  .badge-pill span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600;
+    color: var(--navy); letter-spacing: .5px; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: clamp(36px, 5vw, 48px);
+    font-weight: 700; line-height: 1.17;
+    letter-spacing: -1.44px; color: var(--navy);
+    margin-bottom: 0;
+  }
+  .hero-subtitle {
+    max-width: 672px; margin: 16px auto 0;
+    font-size: 16px; line-height: 1.625; color: var(--text-body);
+    letter-spacing: -.16px; text-align: center;
+  }
+  .stats-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+  .stat-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--blue-pale);
+    border-radius: 8px;
+    padding: 8px 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-pill svg { flex-shrink: 0; color: var(--navy); }
+  .stat-pill span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: var(--navy); letter-spacing: .48px; white-space: nowrap;
+  }
+
+  /* ── CAPABILITIES SECTION ── */
+  .capabilities {
+    background: var(--white);
+    padding: 96px 32px;
+  }
+  .section-header { text-align: center; margin-bottom: 64px; }
+  .eyebrow {
+    display: inline-block;
+    background: rgba(254,106,52,.1);
+    color: var(--red-dark);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    padding: 4px 12px; border-radius: var(--pill-radius);
+    margin-bottom: 12px;
+  }
+  .section-header h2 {
+    font-size: 32px; font-weight: 600;
+    letter-spacing: -.64px; color: var(--navy);
+    line-height: 1.25; margin-bottom: 16px;
+  }
+  .section-header p {
+    font-size: 14px; line-height: 1.6; color: var(--text-body);
+    max-width: 576px; margin: 0 auto;
+  }
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1216px; margin: 0 auto;
+  }
+  .cap-card {
+    background: #fff;
+    border: 1px solid #e8edf8;
+    border-radius: var(--card-radius);
+    padding: 24px;
+    display: flex; flex-direction: column; gap: 0;
+    transition: box-shadow .2s;
+  }
+  .cap-card:hover { box-shadow: 0 8px 32px rgba(0,32,69,.08); }
+  .cap-icon {
+    width: 48px; height: 48px;
+    background: var(--blue-pale);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; flex-shrink: 0;
+  }
+  .cap-icon svg { width: 20px; height: 20px; color: var(--navy); }
+  .cap-card h3 {
+    font-size: 18px; font-weight: 700;
+    color: var(--navy); margin-bottom: 10px; line-height: 1.3;
+  }
+  .cap-card p {
+    font-size: 13px; line-height: 1.6; color: var(--text-body);
+    flex-grow: 1; margin-bottom: 20px;
+  }
+  .cap-card-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 16px; border-top: 1px solid var(--blue-light);
+  }
+  .cap-card-footer .card-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: var(--navy); text-decoration: none;
+  }
+  .cap-card-footer .tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 600;
+    background: var(--blue-pale);
+    color: var(--navy);
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+
+  /* callout bar */
+  .callout-bar {
+    max-width: 1216px; margin: 32px auto 0;
+    background: var(--blue-pale);
+    border: 1px solid var(--blue-light);
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .callout-bar-left { display: flex; align-items: center; gap: 12px; }
+  .callout-bar-left .cb-icon {
+    width: 40px; height: 40px;
+    background: var(--navy); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .callout-bar-left p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; font-weight: 500; color: var(--navy); line-height: 1.5;
+  }
+  .callout-bar-link {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--orange); text-decoration: none;
+    white-space: nowrap;
+    border: 1.5px solid var(--orange);
+    border-radius: 8px;
+    padding: 8px 20px;
+  }
+  .callout-bar-link:hover { background: var(--orange); color: #fff; }
+
+  /* ── PORTFOLIO SECTION ── */
+  .portfolio {
+    background: var(--white);
+    padding: 96px 32px;
+    border-top: 1px solid #eef1f9;
+  }
+  .portfolio-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    max-width: 1216px; margin: 0 auto 40px;
+    gap: 24px;
+  }
+  .portfolio-header-left { max-width: 470px; }
+  .portfolio-header-left .eyebrow { margin-bottom: 10px; }
+  .portfolio-header-left h2 {
+    font-size: 32px; font-weight: 700; color: var(--navy);
+    letter-spacing: -.64px; margin-bottom: 10px;
+  }
+  .portfolio-header-left p { font-size: 13px; color: var(--text-body); line-height: 1.6; }
+  .filter-tags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .filter-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px; font-weight: 500;
+    padding: 7px 16px; border-radius: 8px;
+    border: 1.5px solid var(--blue-light);
+    background: var(--white); color: var(--navy);
+    cursor: pointer; transition: all .15s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--navy); color: #fff; border-color: var(--navy);
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1216px; margin: 0 auto;
+  }
+  .part-card {
+    background: #fff;
+    border: 1px solid #e8edf8;
+    border-radius: var(--card-radius);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+    transition: box-shadow .2s;
+  }
+  .part-card:hover { box-shadow: 0 12px 40px rgba(0,32,69,.1); }
+  .part-card-visual {
+    background: #f4f7ff;
+    height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .part-card-visual svg { width: 160px; height: 160px; }
+  .part-card-tags {
+    position: absolute; top: 12px; left: 12px;
+    display: flex; gap: 6px;
+  }
+  .part-tag {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600;
+    padding: 3px 8px; border-radius: 6px;
+    letter-spacing: .3px;
+  }
+  .part-tag-mat { background: var(--navy); color: #fff; }
+  .part-tag-type { background: var(--blue-pale); color: var(--navy); box-shadow: var(--shadow-sm); }
+  .part-card-status {
+    position: absolute; bottom: 8px; right: 12px;
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600; color: var(--text-body);
+    background: rgba(255,255,255,.85); backdrop-filter: blur(6px);
+    border-radius: 6px; padding: 3px 10px 3px 6px;
+  }
+  .part-card-status .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; }
+  .part-card-body { padding: 20px 24px; flex-grow: 1; display: flex; flex-direction: column; }
+  .part-card-body h3 {
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    margin-bottom: 8px; line-height: 1.4;
+  }
+  .part-card-body p { font-size: 12px; line-height: 1.6; color: var(--text-body); flex-grow: 1; margin-bottom: 16px; }
+  .part-card-stats {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    border-top: 1px solid var(--blue-light);
+    padding-top: 14px; gap: 0;
+  }
+  .part-stat { text-align: center; padding: 0 4px; }
+  .part-stat:not(:last-child) { border-right: 1px solid var(--blue-light); }
+  .part-stat .stat-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 9px; font-weight: 600;
+    color: var(--text-muted); letter-spacing: .4px; text-transform: uppercase;
+    margin-bottom: 4px; display: block;
+  }
+  .part-stat .stat-value {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px; font-weight: 700; color: var(--navy);
+    display: block; line-height: 1.2;
+  }
+
+  /* calibration bar */
+  .calibration-bar {
+    max-width: 1216px; margin: 40px auto 0;
+    background: #fff; border: 1px solid #e8edf8;
+    border-radius: var(--card-radius);
+    padding: 24px 32px;
+    display: flex; align-items: center; gap: 32px;
+  }
+  .calib-img {
+    width: 320px; height: 160px;
+    background: linear-gradient(135deg, #e8edf8 0%, #c8d8f0 100%);
+    border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .calib-img::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,.15) 8px, rgba(255,255,255,.15) 10px);
+  }
+  .calib-label {
+    position: absolute; bottom: 8px; left: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600; color: var(--white);
+    background: rgba(0,32,69,.8); padding: 3px 8px; border-radius: 5px;
+  }
+  .calib-content { flex-grow: 1; }
+  .calib-eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600; color: var(--text-muted);
+    letter-spacing: .4px; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .calib-content h3 {
+    font-size: 20px; font-weight: 700; color: var(--navy);
+    margin-bottom: 10px; line-height: 1.3;
+  }
+  .calib-content p { font-size: 13px; color: var(--text-body); line-height: 1.6; margin-bottom: 14px; }
+  .calib-bullets { display: flex; gap: 24px; flex-wrap: wrap; }
+  .calib-bullet {
+    display: flex; align-items: center; gap: 6px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 600; color: var(--navy);
+  }
+  .calib-bullet svg { width: 15px; height: 15px; color: var(--orange); flex-shrink: 0; }
+
+  /* ── PROCESS SECTION ── */
+  .process { background: var(--blue-bg); padding: 96px 32px; }
+  .process .section-header { margin-bottom: 64px; }
+  .steps-row {
+    display: flex; gap: 24px; align-items: flex-start;
+    max-width: 1216px; margin: 0 auto;
+    position: relative;
+  }
+  .steps-row::before {
+    content: ''; position: absolute;
+    left: 40px; right: 40px; top: 48px;
+    height: 2px; background: var(--blue-light);
+    pointer-events: none;
+  }
+  .step-card {
+    background: #fff;
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow-sm);
+    padding: 20px 20px 44px;
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+  }
+  .step-num-wrap { width: 56px; height: 56px; margin-bottom: 16px; position: relative; z-index: 1; }
+  .step-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 700; color: #fff;
+    box-shadow: 0 0 0 8px var(--blue-bg);
+    position: relative;
+  }
+  .step-num.active { background: var(--orange); box-shadow: 0 0 0 8px var(--blue-bg), var(--shadow-md); }
+  .step-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 700;
+    color: var(--red-dark); letter-spacing: .6px; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .step-card h3 {
+    font-size: 18px; font-weight: 700;
+    color: var(--navy); margin-bottom: 8px; line-height: 1.3;
+  }
+  .step-card p {
+    font-size: 12px; line-height: 1.55;
+    color: var(--text-body); letter-spacing: .12px;
+  }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    padding: 96px 32px;
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy) 100%);
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .cta-section::before {
+    content: ''; position: absolute;
+    width: 384px; height: 384px; border-radius: 50%;
+    background: rgba(254,106,52,.2); filter: blur(64px);
+    bottom: -96px; right: -96px; pointer-events: none;
+  }
+  .cta-section::after {
+    content: ''; position: absolute;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: rgba(69,95,136,.2); filter: blur(64px);
+    top: -96px; left: -96px; pointer-events: none;
+  }
+  .cta-inner { max-width: 1280px; margin: 0 auto; position: relative; display: flex; flex-direction: column; align-items: center; }
+  .cta-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--navy-mid);
+    border-radius: var(--pill-radius);
+    padding: 4px 14px; margin-bottom: 24px;
+  }
+  .cta-badge .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+  .cta-badge span {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 10px; font-weight: 600;
+    color: var(--teal); letter-spacing: .5px; text-transform: uppercase;
+  }
+  .cta-section h2 {
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600; color: #fff;
+    letter-spacing: -.64px; margin-bottom: 0;
+  }
+  .cta-subtitle {
+    max-width: 672px; margin: 16px auto 0;
+    font-size: 16px; color: var(--blue-light);
+    line-height: 1.625; letter-spacing: -.16px;
+  }
+
+  /* ── CONTACT FORM ── */
+  .contact-form-wrap {
+    margin-top: 32px;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: var(--card-radius);
+    padding: 32px;
+    max-width: 480px; width: 100%;
+    text-align: left;
+  }
+  .contact-form-wrap h3 {
+    font-size: 18px; font-weight: 700;
+    color: #fff; margin-bottom: 20px;
+  }
+  .form-row { display: flex; flex-direction: column; gap: 4px; margin-bottom: 14px; }
+  .form-row label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px; font-weight: 600;
+    color: var(--blue-light); letter-spacing: .4px; text-transform: uppercase;
+  }
+  .form-row input {
+    background: rgba(255,255,255,.08);
+    border: 1.5px solid rgba(255,255,255,.18);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; color: #fff;
+    outline: none; transition: border-color .15s;
+    width: 100%;
+  }
+  .form-row input::placeholder { color: rgba(255,255,255,.35); }
+  .form-row input:focus { border-color: var(--orange); }
+  .form-submit {
+    width: 100%;
+    background: var(--orange);
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600; color: #fff;
+    cursor: pointer; letter-spacing: .3px;
+    box-shadow: var(--shadow-md); transition: background .15s;
+    margin-top: 6px;
+  }
+  .form-submit:hover { background: #e55a26; }
+  .form-msg {
+    margin-top: 10px; font-size: 12px; font-weight: 600;
+    text-align: center; min-height: 18px;
+  }
+  .form-msg.success { color: var(--teal); }
+  .form-msg.error { color: #fca5a5; }
+
+  /* buttons row */
+  .cta-buttons { display: flex; gap: 16px; margin-top: 32px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--orange); color: #fff;
+    border: none; border-radius: 8px;
+    padding: 14px 32px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: .28px;
+    cursor: pointer; box-shadow: var(--shadow-md);
+    text-decoration: none; transition: background .15s;
+  }
+  .btn-primary:hover { background: #e55a26; }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--navy-mid);
+    border: 1.5px solid rgba(116,119,127,.3);
+    color: #fff; border-radius: 8px;
+    padding: 13px 29px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: .28px;
+    cursor: pointer; text-decoration: none; transition: background .15s;
+  }
+  .btn-secondary:hover { background: #22406e; }
+  .trust-badges {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--navy-mid);
+    width: 100%; max-width: 640px;
+  }
+  .trust-badge {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; font-weight: 600;
+    color: var(--blue-light); letter-spacing: .48px;
+    white-space: nowrap;
+  }
+  .trust-badge svg { width: 15px; height: 15px; color: var(--orange); flex-shrink: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #000d1a;
+    padding: 40px 32px;
+    text-align: center;
+  }
+  footer p {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px; color: rgba(220,233,255,.5);
+    letter-spacing: .4px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .cards-grid { grid-template-columns: repeat(2,1fr); }
+    .portfolio-grid { grid-template-columns: repeat(2,1fr); }
+    .steps-row { flex-wrap: wrap; }
+    .steps-row::before { display: none; }
+    .step-card { flex: 1 1 calc(50% - 12px); }
+    .portfolio-header { flex-direction: column; align-items: flex-start; }
+    .calibration-bar { flex-direction: column; }
+    .calib-img { width: 100%; height: 200px; }
+    nav ul { display: none; }
+  }
+  @media (max-width: 640px) {
+    .cards-grid, .portfolio-grid { grid-template-columns: 1fr; }
+    .step-card { flex: 1 1 100%; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+    .contact-form-wrap { padding: 24px 20px; }
+    .callout-bar { flex-direction: column; align-items: flex-start; }
+    .portfolio-header-left h2 { font-size: 26px; }
+    .hero h1 { font-size: 32px; }
+    .trust-badges { gap: 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- NAV — Figma: Header node 1:746 -->
+<div class="nav-wrapper">
+  <div class="nav-inner">
+
+    <!-- Logo -->
+    <a href="#top" class="nav-logo">
+      <div class="nav-logo-icon">
+        <!-- X3Fab cube icon -->
+        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 1.5L15.5 5v8L9 16.5 2.5 13V5L9 1.5z" stroke="#fe6a34" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M9 1.5v15M2.5 5l6.5 3.5L15.5 5" stroke="#fe6a34" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">X3Fab</span>
+        <span class="nav-logo-sub">Additive Labs</span>
+      </div>
+    </a>
+
+    <!-- Desktop nav links -->
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#top"          class="nav-link">Home</a>
+      <a href="#portfolio"    class="nav-link active" id="navGallery">Gallery</a>
+      <a href="#capabilities" class="nav-link">Materials</a>
+      <a href="#process"      class="nav-link">About</a>
+      <a href="#contact"      class="nav-link">FAQ</a>
+    </nav>
+
+    <!-- Right cluster -->
+    <div class="nav-right">
+      <a href="#contact" class="nav-cta">Get a Quote</a>
+      <div class="nav-avatar" title="Account">
+        <!-- person icon -->
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="7" cy="4.5" r="2.5" stroke="white" stroke-width="1.3"/>
+          <path d="M1.5 12.5c0-2.485 2.462-4.5 5.5-4.5s5.5 2.015 5.5 4.5" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <!-- Mobile hamburger -->
+      <button class="nav-hamburger" id="navHamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile slide-down menu -->
+  <div class="nav-mobile-menu" id="mobileMenu" role="navigation" aria-label="Mobile navigation">
+    <a href="#top"          class="nav-mobile-link" onclick="closeMobileMenu()">Home</a>
+    <a href="#portfolio"    class="nav-mobile-link active" onclick="closeMobileMenu()">Gallery</a>
+    <a href="#capabilities" class="nav-mobile-link" onclick="closeMobileMenu()">Materials</a>
+    <a href="#process"      class="nav-mobile-link" onclick="closeMobileMenu()">About</a>
+    <a href="#contact"      class="nav-mobile-link" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#contact"      class="nav-mobile-cta" onclick="closeMobileMenu()">Get a Quote</a>
+  </div>
+</div>
+
+<!-- ── HERO SECTION ── -->
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="badge-pill">
+      <span class="dot"></span>
+      <span>Fabrication Showcase • Nationwide India Delivery</span>
+    </div>
+    <h1>What We've Printed</h1>
+    <p class="hero-subtitle">See what comes out of the printer. These are real pieces we've made for people across India — functional parts, prototypes, replacements, and custom items. Same machines, same care we give every order.</p>
+    <div class="stats-pills">
+      <div class="stat-pill">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M5 7.5h5M7.5 5v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>PLA &amp; PETG Experts</span>
+      </div>
+      <div class="stat-pill">
+        <svg width="15" height="9" viewBox="0 0 15 9" fill="none"><rect x="1" y="1" width="13" height="7" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 4.5h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>0.10mm – 0.28mm Layer Precision</span>
+      </div>
+      <div class="stat-pill">
+        <svg width="15" height="12" viewBox="0 0 15 12" fill="none"><rect x="1" y="1" width="13" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 6h7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>Up to 300 × 300 × 400 mm Volume</span>
+      </div>
+      <div class="stat-pill">
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none"><path d="M2 6h12M8 1v10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span>Fast Pan-India Dispatch</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAPABILITIES SECTION ── -->
+<section class="capabilities" id="capabilities">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">What We Do</div>
+      <h2>What We Regularly Print</h2>
+      <p>From one-off repairs to small-batch production — here's the range of work we handle every week.</p>
+    </div>
+    <div class="cards-grid">
+      <!-- Card 1 -->
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="6" width="8" height="12" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="10" y="2" width="8" height="16" rx="1.5" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="10" r="1.2" fill="currentColor"/><circle cx="14" cy="8" r="1.2" fill="currentColor"/></svg>
+        </div>
+        <h3>Functional parts &amp; brackets</h3>
+        <p>High-infill structural mounts, motor brackets, and mechanical braces engineered for mechanical loads and rugged field duties.</p>
+        <div class="cap-card-footer">
+          <a href="#contact" class="card-link">Request a quote</a>
+          <span class="tag">Most popular</span>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="4" y="3" width="12" height="14" rx="2" stroke="currentColor" stroke-width="1.5"/><rect x="6.5" y="6" width="7" height="4.5" rx="1" stroke="currentColor" stroke-width="1.2"/><circle cx="10" cy="13.5" r="1.3" fill="currentColor"/></svg>
+        </div>
+        <h3>Product prototypes</h3>
+        <p>High-fidelity aesthetic and ergonomic prototypes for client presentations, investor pitches, form-fit verifications, and user testing.</p>
+        <div class="cap-card-footer">
+          <a href="#contact" class="card-link">Request a quote</a>
+          <span class="tag">Fast turnaround</span>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="10" r="1.5" fill="currentColor"/><path d="M10 3v2M10 15v2M3 10h2M15 10h2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Replacement components</h3>
+        <p>Discontinued appliances, vintage gear wheels, car trim clips, and obsolete hardware reproduced precisely with zero-slop fit.</p>
+        <div class="cap-card-footer">
+          <a href="#contact" class="card-link">Request a quote</a>
+          <span class="tag">Reverse engineered</span>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="8" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 8V5a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="13" r="1.5" fill="currentColor"/></svg>
+        </div>
+        <h3>Custom tools &amp; jigs</h3>
+        <p>Production line guides, alignment jigs, drilling fixtures, and bespoke workshop organizers designed for repetitive factory efficiency.</p>
+        <div class="cap-card-footer">
+          <a href="#contact" class="card-link">Request a quote</a>
+          <span class="tag">B2B</span>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg viewBox="0 0 20 20" fill="none"><path d="M10 2l2.5 5.5L18 8.5l-4 4 1 5.5L10 15l-5 3 1-5.5-4-4 5.5-1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Small decorative pieces &amp; models</h3>
+        <p>Architectural maquettes, exhibition figurines, custom brand merch, and detailed art models manufactured with fine-tuned layer heights.</p>
+        <div class="cap-card-footer">
+          <a href="#contact" class="card-link">Request a quote</a>
+          <span class="tag">Fine detail</span>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="cap-card">
+        <div class="cap-icon">
+          <svg viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="11" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 5V4a4 4 0 018 0v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M7 10h6M10 7v6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Small-batch product samples</h3>
+        <p>10 to 100 unit production runs for market testing, hardware startups, and kickstarter fulfillments without injection mold tooling costs.</p>
+        <div class="cap-card-footer">
+          <a href="#contact" class="card-link">Request a quote</a>
+          <span class="tag">Volume discount</span>
+        </div>
+      </div>
+    </div>
+    <!-- Callout bar -->
+    <div class="callout-bar">
+      <div class="callout-bar-left">
+        <div class="cb-icon">
+          <svg width="16" height="20" viewBox="0 0 16 20" fill="none"><path d="M8 1L2 5v5c0 4.418 2.686 8.56 6 10 3.314-1.44 6-5.582 6-10V5L8 1z" stroke="white" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <p>Not sure if your design is printable? Send us your STL/STEP/OBJ file — we review every submission within <strong>2 hours</strong> and give honest printability feedback, completely free.</p>
+      </div>
+      <a href="#contact" class="callout-bar-link">Send your file →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PORTFOLIO SECTION ── -->
+<section class="portfolio" id="portfolio">
+  <div class="container">
+    <div class="portfolio-header">
+      <div class="portfolio-header-left">
+        <div class="eyebrow">Portfolio</div>
+        <h2>What We've Printed</h2>
+        <p>Real orders from real clients. Click any card to get a quote for a similar part.</p>
+      </div>
+      <div class="filter-tags">
+        <button class="filter-btn active" onclick="filterCards('all',this)">All Items</button>
+        <button class="filter-btn" onclick="filterCards('functional',this)">Functional Parts</button>
+        <button class="filter-btn" onclick="filterCards('prototype',this)">Prototypes</button>
+        <button class="filter-btn" onclick="filterCards('replacement',this)">Replacements</button>
+        <button class="filter-btn" onclick="filterCards('batch',this)">Small Batch</button>
+      </div>
+    </div>
+    <div class="portfolio-grid" id="portfolioGrid">
+
+      <!-- CARD 1: Angle Bracket -->
+      <div class="part-card" data-category="functional">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <path d="M38.4 28.8h105.6v48H38.4z" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <path d="M38.4 76.8v105.6H38.4z" stroke="#8fa8d4" stroke-width="2"/>
+            <rect x="38.4" y="48" width="67.2" height="105.6" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="105.6" y="57.6" width="38.4" height="96" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <circle cx="72" cy="100.5" r="10" fill="none" stroke="#8fa8d4" stroke-width="2"/>
+            <circle cx="130.5" cy="96" r="10" fill="none" stroke="#8fa8d4" stroke-width="2"/>
+            <text x="22" y="96" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">90°</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">PETG</span>
+            <span class="part-tag part-tag-type">Functional</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Custom mounting bracket for a small machine</h3>
+          <p>Heavy-duty reinforced angle bracket with counter-sunk M6 bolt holes, calibrated specifically to reduce industrial pump vibration.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Infill</span><span class="stat-value">60%</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.2mm</span></div>
+            <div class="part-stat"><span class="stat-label">Weight</span><span class="stat-value">84g</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2: IoT Housing -->
+      <div class="part-card" data-category="prototype">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <rect x="48" y="33.6" width="96" height="124.8" rx="8" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="65.3" y="52.8" width="61.4" height="40.3" rx="4" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+            <text x="78" y="76" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">3.2V</text>
+            <circle cx="96" cy="115.6" r="9.6" fill="#b8cce8" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="72" y="139.2" width="48" height="5.76" rx="2.5" fill="#8fa8d4"/>
+            <circle cx="136" cy="43.4" r="3.84" fill="#8fa8d4"/>
+            <rect x="130" y="28.8" width="24" height="14.4" rx="3" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.2"/>
+            <text x="135" y="38" font-size="8" fill="#6b7fa8" font-family="Space Grotesk">WiFi</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">PLA</span>
+            <span class="part-tag part-tag-type">Prototype</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Product prototype for a client presentation</h3>
+          <p>Ergonomic handheld IoT sensor housing with fine surface layering, captive display aperture, and zero-flex snap interlocks.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Infill</span><span class="stat-value">20%</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.15mm</span></div>
+            <div class="part-stat"><span class="stat-label">Parts</span><span class="stat-value">3</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 3: Gear -->
+      <div class="part-card" data-category="replacement">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <circle cx="96" cy="96" r="67.2" fill="none" stroke="#8fa8d4" stroke-width="2" stroke-dasharray="12 5"/>
+            <circle cx="96" cy="96" r="46" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <circle cx="96" cy="96" r="28.8" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.5"/>
+            <circle cx="96" cy="96" r="13.4" fill="#b8cce8" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="92.2" y="76.8" width="7.6" height="11.5" rx="2" fill="#8fa8d4"/>
+            <text x="40" y="154" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">Mod 1.5 • 32T</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">POM</span>
+            <span class="part-tag part-tag-type">Replacement</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Replacement gear that was hard to find</h3>
+          <p>Precision dual-pitch spur gear for a discontinued commercial mixer, engineered with keyed drive-shaft socket to prevent slippage.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Infill</span><span class="stat-value">80%</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.12mm</span></div>
+            <div class="part-stat"><span class="stat-label">Saved</span><span class="stat-value">₹8k</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 4: Cable Holders -->
+      <div class="part-card" data-category="batch">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <g transform="translate(24,24)">
+              <rect x="0" y="0" width="34" height="48" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+              <rect x="8" y="0" width="18" height="12" rx="3" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+              <rect x="44" y="0" width="34" height="48" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+              <rect x="52" y="0" width="18" height="12" rx="3" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+              <rect x="88" y="0" width="34" height="48" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+              <rect x="96" y="0" width="18" height="12" rx="3" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+              <rect x="0" y="58" width="34" height="48" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+              <rect x="8" y="58" width="18" height="12" rx="3" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+              <rect x="44" y="58" width="34" height="48" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+              <rect x="52" y="58" width="18" height="12" rx="3" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+              <rect x="88" y="58" width="34" height="48" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+              <rect x="96" y="58" width="18" height="12" rx="3" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.2"/>
+            </g>
+            <text x="52" y="176" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">×24 units</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">ABS</span>
+            <span class="part-tag part-tag-type">Small Batch</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Dispatched</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Small batch of holders for a workshop</h3>
+          <p>Set of 24 DIN-rail snap-fit cable organizers and calibrated tool brackets customized for an electronics manufacturing bench.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Qty</span><span class="stat-value">24</span></div>
+            <div class="part-stat"><span class="stat-label">Mat.</span><span class="stat-value">ABS</span></div>
+            <div class="part-stat"><span class="stat-label">Days</span><span class="stat-value">3</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 5: Electronics Enclosure -->
+      <div class="part-card" data-category="functional">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <rect x="33.6" y="43.2" width="124.8" height="105.6" rx="6" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <line x1="52.8" y1="67.2" x2="110.4" y2="67.2" stroke="#8fa8d4" stroke-width="2" stroke-linecap="round"/>
+            <line x1="52.8" y1="81.6" x2="110.4" y2="81.6" stroke="#8fa8d4" stroke-width="2" stroke-linecap="round"/>
+            <line x1="52.8" y1="96" x2="110.4" y2="96" stroke="#8fa8d4" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="134.4" cy="67.2" r="4.3" fill="#8fa8d4"/>
+            <circle cx="134.4" cy="81.6" r="4.3" fill="#8fa8d4"/>
+            <rect x="52.8" y="117.1" width="26.9" height="13.4" rx="3" fill="#b8cce8" stroke="#8fa8d4" stroke-width="1.2"/>
+            <text x="56.6" y="127.7" font-size="9" fill="#6b7fa8" font-family="Space Grotesk">USB</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">PETG</span>
+            <span class="part-tag part-tag-type">Functional</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Functional enclosure for electronics</h3>
+          <p>Custom sensor chassis with ventilated intake louvers, brass M3 threaded inserts, and precision IO connector cutouts.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Infill</span><span class="stat-value">40%</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.2mm</span></div>
+            <div class="part-stat"><span class="stat-label">Hrs</span><span class="stat-value">9h</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 6: Impeller -->
+      <div class="part-card" data-category="replacement">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <circle cx="96" cy="96" r="60" fill="none" stroke="#8fa8d4" stroke-width="1.5" stroke-dasharray="8 4"/>
+            <circle cx="96" cy="96" r="16" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <path d="M96 80 Q120 72 128 56 Q118 76 112 80z" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.2"/>
+            <path d="M112 112 Q136 108 148 120 Q128 110 118 118z" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.2"/>
+            <path d="M80 112 Q68 136 54 136 Q72 122 76 114z" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.2"/>
+            <path d="M80 80 Q60 72 44 60 Q68 76 72 82z" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.2"/>
+            <circle cx="96" cy="96" r="6" fill="#8fa8d4"/>
+            <text x="40" y="176" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">Saved ₹15,000</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">POM</span>
+            <span class="part-tag part-tag-type">Replacement</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>One-off repair part</h3>
+          <p>Replacement impeller for a commercial water treatment valve. Avoided total machine decommissioning and saved ₹15,000.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Infill</span><span class="stat-value">75%</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.12mm</span></div>
+            <div class="part-stat"><span class="stat-label">Saved</span><span class="stat-value">₹15k</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 7: Robotic Gripper -->
+      <div class="part-card" data-category="functional">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <rect x="62.4" y="48" width="24" height="86.4" rx="6" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="105.6" y="48" width="24" height="86.4" rx="6" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="55.7" y="42.2" width="13.4" height="5.8" rx="2" fill="#8fa8d4"/>
+            <rect x="122.9" y="42.2" width="13.4" height="5.8" rx="2" fill="#8fa8d4"/>
+            <rect x="78.7" y="117.1" width="34.6" height="34.6" rx="8" fill="#b8cce8" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="90.2" y="128.6" width="11.5" height="11.5" rx="3" fill="#8fa8d4"/>
+            <text x="56" y="176" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">3-finger grip</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">PLA+</span>
+            <span class="part-tag part-tag-type">Robotics</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Robotic arm servo joint &amp; claw</h3>
+          <p>Articulated modular gripper fingers with interlocking hinge tolerances and ribbed tactile pads for an engineering robotics squad.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Infill</span><span class="stat-value">45%</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.2mm</span></div>
+            <div class="part-stat"><span class="stat-label">Parts</span><span class="stat-value">6</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 8: Drone Gimbal -->
+      <div class="part-card" data-category="functional">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <rect x="40" y="72" width="112" height="64" rx="8" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <circle cx="96" cy="104" r="22" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.5"/>
+            <circle cx="96" cy="104" r="10" fill="#b8cce8" stroke="#8fa8d4" stroke-width="1.2"/>
+            <line x1="40" y1="96" x2="30" y2="80" stroke="#8fa8d4" stroke-width="2" stroke-linecap="round"/>
+            <line x1="152" y1="96" x2="162" y2="80" stroke="#8fa8d4" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="30" cy="78" r="6" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <circle cx="162" cy="78" r="6" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <text x="44" y="156" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">58g ultralight</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">PLA</span>
+            <span class="part-tag part-tag-type">Drone</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Drone gimbal camera dampener plate</h3>
+          <p>Ultra-lightweight quadcopter payload platform, printed with calibrated perimeters for maximum resonant dampening.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Weight</span><span class="stat-value">58g</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.15mm</span></div>
+            <div class="part-stat"><span class="stat-label">Hrs</span><span class="stat-value">4.5h</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 9: Arch Facade -->
+      <div class="part-card" data-category="prototype">
+        <div class="part-card-visual">
+          <svg viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9.6" y="9.6" width="172.8" height="172.8" rx="8" fill="#e8edf8" stroke="#c5d3ee" stroke-width="1.5"/>
+            <rect x="38.4" y="28.8" width="115.2" height="134.4" rx="4" fill="#c5d3ee" stroke="#8fa8d4" stroke-width="1.5"/>
+            <rect x="48" y="43.2" width="96" height="105.6" rx="2" fill="#d8e4f4" stroke="#8fa8d4" stroke-width="1.5"/>
+            <line x1="48" y1="43.2" x2="48" y2="148.8" stroke="#8fa8d4" stroke-width="1.5"/>
+            <line x1="72" y1="43.2" x2="72" y2="148.8" stroke="#8fa8d4" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="96" y1="43.2" x2="96" y2="148.8" stroke="#8fa8d4" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="120" y1="43.2" x2="120" y2="148.8" stroke="#8fa8d4" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="48" y1="72" x2="144" y2="72" stroke="#8fa8d4" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="48" y1="96" x2="144" y2="96" stroke="#8fa8d4" stroke-width="1" stroke-dasharray="4 3"/>
+            <line x1="48" y1="120" x2="144" y2="120" stroke="#8fa8d4" stroke-width="1" stroke-dasharray="4 3"/>
+            <text x="48" y="164" font-size="10" fill="#6b7fa8" font-family="Space Grotesk">Scale 1:50</text>
+          </svg>
+          <div class="part-card-tags">
+            <span class="part-tag part-tag-mat">PLA</span>
+            <span class="part-tag part-tag-type">Architecture</span>
+          </div>
+          <div class="part-card-status"><span class="status-dot"></span>Delivered</div>
+        </div>
+        <div class="part-card-body">
+          <h3>Architectural scale facade section</h3>
+          <p>Micro-detailed 1:50 parametric facade study demonstrating steep overhangs, solar fin angles, and complex curtain wall geometry.</p>
+          <div class="part-card-stats">
+            <div class="part-stat"><span class="stat-label">Scale</span><span class="stat-value">1:50</span></div>
+            <div class="part-stat"><span class="stat-label">Layer</span><span class="stat-value">0.1mm</span></div>
+            <div class="part-stat"><span class="stat-label">Hrs</span><span class="stat-value">18h</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /portfolio-grid -->
+
+    <!-- Calibration bar -->
+    <div class="calibration-bar">
+      <div class="calib-img">
+        <div class="calib-label">Workshop QC Lab</div>
+      </div>
+      <div class="calib-content">
+        <div class="calib-eyebrow">Our quality standard</div>
+        <h3>Calibrated for repeatability</h3>
+        <p>Every file uploaded goes through automated slicing checks before hitting the print bed. We measure critical internal and external dimensions using Mitutoyo 0.01mm digital calipers before any part leaves our bench.</p>
+        <div class="calib-bullets">
+          <div class="calib-bullet">
+            <svg viewBox="0 0 15 15" fill="none"><path d="M2 8l4 4 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Tolerance verified
+          </div>
+          <div class="calib-bullet">
+            <svg viewBox="0 0 15 15" fill="none"><path d="M2 8l4 4 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Photo before dispatch
+          </div>
+          <div class="calib-bullet">
+            <svg viewBox="0 0 15 15" fill="none"><path d="M2 8l4 4 7-7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Reprint guarantee
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS SECTION ── -->
+<section class="process" id="process">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">The Process</div>
+      <h2>From File to Finished Piece</h2>
+      <p>Simple, transparent, and built around your timeline with end-to-end status tracking.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="step-num-wrap"><div class="step-num">1</div></div>
+        <div class="step-label">Step 01</div>
+        <h3>You send the design</h3>
+        <p>Upload your STL, STEP, or OBJ file, or simply send photos, hand sketches, and target dimensions.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num-wrap"><div class="step-num">2</div></div>
+        <div class="step-label">Step 02</div>
+        <h3>We check &amp; prep</h3>
+        <p>We inspect wall thickness, orientation, support placement, and optimize slicing parameters for strength.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num-wrap"><div class="step-num active">3</div></div>
+        <div class="step-label">Step 03</div>
+        <h3>We print carefully</h3>
+        <p>Calibrated beds, tuned temperatures, and layer-by-layer monitoring in our climate-controlled lab.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num-wrap"><div class="step-num">4</div></div>
+        <div class="step-label">Step 04</div>
+        <h3>Clean, check &amp; pack</h3>
+        <p>Support removal, tolerance verification with digital calipers, deburring, and protective cushioning.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num-wrap"><div class="step-num">5</div></div>
+        <div class="step-label">Step 05</div>
+        <h3>Fast ship across India</h3>
+        <p>Secure bubble-wrapped packaging with express door-to-door courier tracking across all Indian pincodes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA / CONTACT SECTION ── -->
+<section class="cta-section" id="contact">
+  <div class="cta-inner">
+    <div class="cta-badge"><span class="dot"></span><span>Ready to Fabricate</span></div>
+    <h2>Have something you want printed?</h2>
+    <p class="cta-subtitle">Send us your 3D model or sketch today. We review every file within 2 hours and provide instant printability feedback and transparent pricing.</p>
+
+    <!-- Contact Form -->
+    <div class="contact-form-wrap">
+      <h3>Get an instant quote</h3>
+      <form id="quoteForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <label for="fname">Your Name</label>
+          <input type="text" id="fname" name="name" placeholder="Ravi Kumar" required autocomplete="name" />
+        </div>
+        <div class="form-row">
+          <label for="femail">Email Address</label>
+          <input type="email" id="femail" name="email" placeholder="ravi@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-row">
+          <label for="fphone">Phone / WhatsApp</label>
+          <input type="tel" id="fphone" name="phone" placeholder="+91 98765 43210" required autocomplete="tel" />
+        </div>
+        <button class="form-submit" type="submit" id="submitBtn">Send My File Details →</button>
+        <div class="form-msg" id="formMsg"></div>
+      </form>
+    </div>
+
+    <!-- Secondary buttons -->
+    <div class="cta-buttons">
+      <a href="https://wa.me/919999999999" target="_blank" rel="noopener" class="btn-secondary">
+        <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M8.5 1a7.5 7.5 0 100 15 7.5 7.5 0 000-15zM5.5 5.5c.1-.3.5-1.5 1.5-1 .4.2.7.7.9 1.1.2.4 0 .9-.3 1.2-.2.2-.3.4-.2.6.3.8 1 1.6 1.8 2 .2.1.4 0 .6-.2.3-.4.8-.6 1.3-.4.5.3 1 .6 1.2.9.3.5-.1 1-.5 1.3-.9.6-2.1.4-3-0.2C7.4 9.7 5.1 7 5.5 5.5z" fill="white"/></svg>
+        Chat on WhatsApp
+      </a>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <svg viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="1.4"/><path d="M7.5 4v3.5l2.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        2-Hour File Assessment
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 15 15" fill="none"><rect x="1" y="4" width="13" height="8" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 4V3a3.5 3.5 0 017 0v1" stroke="currentColor" stroke-width="1.4"/></svg>
+        Safe Pan-India Delivery
+      </div>
+      <div class="trust-badge">
+        <svg viewBox="0 0 15 15" fill="none"><path d="M7.5 1L2 4v4c0 3.6 2.4 6.9 5.5 8C10.6 14.9 13 11.6 13 8V4L7.5 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        NDA &amp; IP Protection Guaranteed
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2024 PrintLab India · Nationwide FDM 3D Printing Service · All rights reserved</p>
+</footer>
+
+<script>
+  /* ── FORM SUBMISSION ── */
+  var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfl6hNSQBRXldBQYG90zyYC-SFKrUMjkCoLlVX1YVcaQgMEuJ5aNokEt9G2sI8cxINYg/exec';
+
+  async function submitForm(e) {
+    e.preventDefault();
+    var btn  = document.getElementById('submitBtn');
+    var msg  = document.getElementById('formMsg');
+    // Use getElementById so we never clash with form.name DOM property
+    var nameVal  = document.getElementById('fname').value.trim();
+    var emailVal = document.getElementById('femail').value.trim();
+    var phoneVal = document.getElementById('fphone').value.trim();
+
+    btn.disabled    = true;
+    btn.textContent = 'Sending\u2026';
+    msg.textContent = '';
+    msg.className   = 'form-msg';
+
+    try {
+      var url = SCRIPT_URL
+        + '?name='  + encodeURIComponent(nameVal)
+        + '&email=' + encodeURIComponent(emailVal)
+        + '&phone=' + encodeURIComponent(phoneVal);
+
+      await fetch(url, { method: 'GET', mode: 'no-cors' });
+      // no-cors: request fires successfully; we cannot read the response body
+      msg.textContent = '\u2713 Quote request sent! We\'ll reply within 2 hours.';
+      msg.className   = 'form-msg success';
+      document.getElementById('quoteForm').reset();
+    } catch (err) {
+      msg.textContent = '\u2717 Something went wrong \u2014 please try WhatsApp instead.';
+      msg.className   = 'form-msg error';
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = 'Send My File Details \u2192';
+    }
+  }
+
+  /* ── MOBILE MENU ── */
+  var hamburger  = document.getElementById('navHamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', function() {
+    var isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+      closeMobileMenu();
+    }
+  });
+
+  /* ── SCROLL-SPY ── */
+  var navSections = [
+    { id: 'top',          link: document.querySelector('.nav-links .nav-link:nth-child(1)') },
+    { id: 'portfolio',    link: document.querySelector('.nav-links .nav-link:nth-child(2)') },
+    { id: 'capabilities', link: document.querySelector('.nav-links .nav-link:nth-child(3)') },
+    { id: 'process',      link: document.querySelector('.nav-links .nav-link:nth-child(4)') },
+    { id: 'contact',      link: document.querySelector('.nav-links .nav-link:nth-child(5)') }
+  ];
+
+  function updateActiveLink() {
+    var scrollY  = window.scrollY + 120;
+    var current  = navSections[0];
+    navSections.forEach(function(s) {
+      var el = document.getElementById(s.id);
+      if (el && el.offsetTop <= scrollY) { current = s; }
+    });
+    navSections.forEach(function(s) {
+      if (s.link) { s.link.classList.remove('active'); }
+    });
+    if (current.link) { current.link.classList.add('active'); }
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+  /* ── PORTFOLIO FILTER ── */
+  function filterCards(cat, clickedBtn) {
+    document.querySelectorAll('.filter-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    clickedBtn.classList.add('active');
+    document.querySelectorAll('.part-card').forEach(function(card) {
+      card.style.display = (cat === 'all' || card.dataset.category === cat) ? '' : 'none';
+    });
+  }
+</script>
+</body>
+</html>
